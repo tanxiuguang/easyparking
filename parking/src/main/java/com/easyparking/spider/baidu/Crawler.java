@@ -3,12 +3,18 @@ package com.easyparking.spider.baidu;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.PropertyConfigurator;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -24,24 +30,24 @@ public class Crawler {
 	private Log logger = LogFactory.getLog(this.getClass());
 	
 	private static final String[] keys = {
-		"5f2345904a86ddb927372e9d88a9de2e",
-		"4d263b1a71c6470dcc9d5d997eec2db9", 
-		"92647395c154b571306ee85460032a9b",
-		"a71bb127025edc29a14dd9f5b0dcec16",
+		"5568cc5d73c3f9d4e6cd2eed8ae2d8d6",
+		"f9c57c603af26d2ab51a97ff79ea689d",
 		"8ff13ca44f18bdc78e6acba0ee5222e4",
-		"be68e80a086317f5a44b65116ccb1bfb"
+		"be68e80a086317f5a44b65116ccb1bfb",
+		"0c4a94a4a9c96f79c38e2d6bade729be",
+		"a6d7f4d6cc26c40de940dd5ffecbdfce"
 	};
 	
 	
-	private Set<BaiduParkData> parseResult(String result) {
+	public Set<BaiduParkData> parseResult(String result) {
 		try {
 			JSONObject resultJSON = new JSONObject(result);
 			String status = resultJSON.optString("status");
-			logger.debug("status: " + status);
+			logger.info("status: " + status);
 			
 			JSONArray resultJSONArray = resultJSON.optJSONArray("results");
 			Set<BaiduParkData> dataSet = new HashSet<BaiduParkData>();
-			
+				
 			for (int i = 0; i < resultJSONArray.length(); i++) {
 				Gson gson = new Gson();
 				BaiduParkData data = gson.fromJson(resultJSONArray.optJSONObject(i).toString(), BaiduParkData.class);
@@ -56,20 +62,36 @@ public class Crawler {
 		return null;
 	}
 	
-	public void crawleData() {
-		double startLat = 39.704575;
+	public List<String> crawleData() {
+		double startLat = 40.014575;
 		double endLat = 40.252305;
 		double endLng = 116.669233;
 		
 		int counter = 0;
+		List<String> urlList = new ArrayList<String>();
 		for ( ; startLat <= endLat; startLat += 0.01) {
 			logger.debug("test");
 			for (double startLng = 116.107307; startLng <= endLng; startLng += 0.01) {
-				logger.debug(buildCrawlUrl(startLat, startLng, startLat + 0.01, startLng + 0.01, keys[counter / 800]));
+				String url = buildCrawlUrl(startLat, startLng, startLat + 0.01, startLng + 0.01, keys[counter / 800]);
+				logger.info(url);
+				//urlList.add(url);
+				Set<BaiduParkData> dataSet = parseResult(Request.requestGet(url));
+				saveData(dataSet, true);
 				counter++;
+				
+				if (dataSet != null && dataSet.size() >= 20) {
+					logger.info("result size 20" + url);
+				}
+				
+				try {
+					Thread.sleep(100);
+				} catch	(Exception e) {
+					logger.error(e.getMessage(), e);
+				}
 			}
 		}
-		logger.debug(counter);
+		
+		return urlList;
 	}
 	
 	
@@ -85,9 +107,9 @@ public class Crawler {
 		return builder.toString();
 	}
 	
-	private void saveData(Set<BaiduParkData> dataSet, boolean append) {
+	public synchronized void saveData(Set<BaiduParkData> dataSet, boolean append) {
 		Gson gson = new Gson();
-		if (dataSet != null) {
+		if (dataSet != null && dataSet.size() > 0) {
 			try {
 				FileOutputStream fos = new FileOutputStream("/tmp/baidudata", append);
 				OutputStreamWriter out = new OutputStreamWriter(fos, "utf-8");
@@ -107,13 +129,31 @@ public class Crawler {
 	}
 	
 	public void test() {
+		logger.debug("debug");
+		logger.info("test");
 		saveData(parseResult(Request.requestGet(buildCrawlUrl(39.72,116.12,39.73,116.13, "5f2345904a86ddb927372e9d88a9de2e"))), true);
 	}
 	
 	public static void main(String[] args) {
-		BasicConfigurator.configure();
+//		BasicConfigurator.configure();
+//		Logger.getRootLogger().setLevel(Level.INFO);
+	
+		PropertyConfigurator.configure("log4j.properties");
 		Crawler crawler = new Crawler();
 		crawler.crawleData();
+//		List<String> urlList = crawler.crawleData();
+//		BlockingQueue<String> queue = new LinkedBlockingQueue<String>(urlList);
+//		ExecutorService executor = Executors.newFixedThreadPool(10);
+//		
+//		for (int i = 0; i < 20; i++) {
+//			CrawlerRunnable worker = new CrawlerRunnable(queue);
+//			executor.execute(worker);
+//		}
+//		executor.shutdown();
+//		while (!executor.isTerminated()) {
+//			
+//		}
+
 	}
 
 }
