@@ -13,7 +13,7 @@ public class Request {
 	private static Log logger = LogFactory.getLog(Request.class);
 
 	public static String requestGet(String url) {
-		return requestGet(url, 1000);
+		return requestGet(url, 5000);
 	}
 
 
