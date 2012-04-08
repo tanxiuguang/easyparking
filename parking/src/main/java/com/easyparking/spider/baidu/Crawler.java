@@ -32,7 +32,14 @@ public class Crawler {
 		"8ff13ca44f18bdc78e6acba0ee5222e4",
 		"be68e80a086317f5a44b65116ccb1bfb",
 		"0c4a94a4a9c96f79c38e2d6bade729be",
-		"a6d7f4d6cc26c40de940dd5ffecbdfce"
+		"a6d7f4d6cc26c40de940dd5ffecbdfce",
+		"96c3607ddd6dd6f7c9abd12405c6a43e",
+		"8020a4592e26e30f8d866126a8ac8669",
+		"36b1f697547f718176f6f66f4200dac5",
+		"cc47fbb42ef0f675e9d933e219d56ff1",
+		"0479aff8a0ff1dc2d9330303f92c7a66",
+		"cf93fe0430649318696ec5d88b2d461d"
+		
 	};
 	
 	
