@@ -7,10 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -46,7 +43,7 @@ public class Crawler {
 			logger.info("status: " + status);
 			
 			JSONArray resultJSONArray = resultJSON.optJSONArray("results");
-			Set<BaiduParkData> dataSet = new HashSet<BaiduParkData>();
+			Set<BaiduParkData> dataSet = new TreeSet<BaiduParkData>();
 				
 			for (int i = 0; i < resultJSONArray.length(); i++) {
 				Gson gson = new Gson();
@@ -63,25 +60,31 @@ public class Crawler {
 	}
 	
 	public List<String> crawleData() {
-		double startLat = 40.014575;
-		double endLat = 40.252305;
-		double endLng = 116.669233;
+		double startLat = 39.981157;
+		double endLat = 39.991342;
+		double startLng = 116.311582;
+		double endLng = 116.324967;
 		
 		int counter = 0;
 		List<String> urlList = new ArrayList<String>();
+		Set<BaiduParkData> dataSet = new TreeSet<BaiduParkData>();
 		for ( ; startLat <= endLat; startLat += 0.01) {
 			logger.debug("test");
-			for (double startLng = 116.107307; startLng <= endLng; startLng += 0.01) {
-				String url = buildCrawlUrl(startLat, startLng, startLat + 0.01, startLng + 0.01, keys[counter / 800]);
-				logger.info(url);
-				//urlList.add(url);
-				Set<BaiduParkData> dataSet = parseResult(Request.requestGet(url));
-				saveData(dataSet, true);
+			for (; startLng <= endLng; startLng += 0.01) {
+//				String url = buildCrawlUrl(startLat, startLng, startLat + 0.01, startLng + 0.01, keys[counter / 800]);
+//				logger.info(url);
+//				//urlList.add(url);
+//				Set<BaiduParkData> dataSet = parseResult(Request.requestGet(url));
+//				
+//				if (dataSet != null && dataSet.size() >= 20) {
+//					logger.info("result size 20" + url);
+//				}
+				
+				crawlScal(dataSet, startLat, startLng, startLat + 0.01, startLng + 0.01, keys[counter / 500], counter);
+				
 				counter++;
 				
-				if (dataSet != null && dataSet.size() >= 20) {
-					logger.info("result size 20" + url);
-				}
+				
 				
 				try {
 					Thread.sleep(100);
@@ -91,7 +94,36 @@ public class Crawler {
 			}
 		}
 		
+		saveData(dataSet, true);
+		
 		return urlList;
+	}
+	
+	private void crawlScal(Set<BaiduParkData> result, double startLat, double startLng, double endLat, double endLng, String key, int counter) {
+		String url = buildCrawlUrl(startLat, startLng, endLat, endLng, keys[counter / 800]);
+		logger.info(url);
+		//urlList.add(url);
+		Set<BaiduParkData> dataSet = parseResult(Request.requestGet(url));
+		
+		
+		if (dataSet != null && dataSet.size() >= 20) {
+			
+			logger.info("start lat: " + startLat + " endLat: " + endLat);
+			double midLat = (startLat + endLat) / 2;
+			logger.info("result size 20 begin recursion" + midLat);
+			crawlScal(result, startLat, startLng, (startLat + endLat) / 2, endLng, key, counter + 1);
+			crawlScal(result, (startLat + endLat) / 2, startLng, endLat, endLng, key, counter + 1);
+		} else {
+			result.addAll(dataSet);
+			return;
+		}
+		
+		try {
+			Thread.sleep(100);
+		} catch	(Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+		
 	}
 	
 	

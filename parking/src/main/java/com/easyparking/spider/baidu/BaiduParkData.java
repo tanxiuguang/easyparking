@@ -3,7 +3,7 @@ package com.easyparking.spider.baidu;
  * @author tanxiuguang
  * create on Mar 15, 2012
  */
-public class BaiduParkData {
+public class BaiduParkData implements Comparable<BaiduParkData>{
 	
 	private String name;
 	
@@ -39,5 +39,9 @@ public class BaiduParkData {
 	@Override
 	public boolean equals(Object obj) {
 		return this.location.equals(((BaiduParkData) obj).getLocation());
+	}
+
+	public int compareTo(BaiduParkData o) {
+		return this.location.equals(((BaiduParkData) o).getLocation()) ? 0 : 1;
 	}
 }

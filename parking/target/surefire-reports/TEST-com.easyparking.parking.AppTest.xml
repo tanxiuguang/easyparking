@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite failures="0" time="0.008" errors="0" skipped="0" tests="1" name="com.easyparking.parking.AppTest">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries"/>
+    <property name="java.vm.version" value="20.4-b02-402"/>
+    <property name="awt.nativeDoubleBuffering" value="true"/>
+    <property name="gopherProxySet" value="false"/>
+    <property name="mrj.build" value="11D50"/>
+    <property name="java.vm.vendor" value="Apple Inc."/>
+    <property name="java.vendor.url" value="http://www.apple.com/"/>
+    <property name="path.separator" value=":"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="unknown"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/tanxiuguang/work/personal/easyparking/parking"/>
+    <property name="java.runtime.version" value="1.6.0_29-b11-402-11D50"/>
+    <property name="java.awt.graphicsenv" value="apple.awt.CGraphicsEnvironment"/>
+    <property name="basedir" value="/Users/tanxiuguang/work/personal/easyparking/parking"/>
+    <property name="java.endorsed.dirs" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/endorsed"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="surefire.real.class.path" value="/Users/tanxiuguang/work/personal/easyparking/parking/target/surefire/surefirebooter5244979944219729510.jar"/>
+    <property name="java.io.tmpdir" value="/var/folders/7m/5vhc3w591z7_2dsy46ypkwpc0000gn/T/"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="sun.jnu.encoding" value="MacRoman"/>
+    <property name="java.library.path" value=".:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="surefire.test.class.path" value="/Users/tanxiuguang/work/personal/easyparking/parking/target/test-classes:/Users/tanxiuguang/work/personal/easyparking/parking/target/classes:/Users/tanxiuguang/work/open_source/maven/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/Users/tanxiuguang/work/open_source/maven/.m2/repository/org/json/json/20090211/json-20090211.jar:/Users/tanxiuguang/work/open_source/maven/.m2/repository/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar:/Users/tanxiuguang/work/open_source/maven/.m2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar:/Users/tanxiuguang/work/open_source/maven/.m2/repository/commons-codec/commons-codec/1.2/commons-codec-1.2.jar:/Users/tanxiuguang/work/open_source/maven/.m2/repository/com/google/code/gson/gson/1.7.1/gson-1.7.1.jar:/Users/tanxiuguang/work/open_source/maven/.m2/repository/log4j/log4j/1.2.16/log4j-1.2.16.jar:"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="50.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.7.3"/>
+    <property name="user.home" value="/Users/tanxiuguang"/>
+    <property name="user.timezone" value=""/>
+    <property name="java.awt.printerjob" value="apple.awt.CPrinterJob"/>
+    <property name="java.specification.version" value="1.6"/>
+    <property name="file.encoding" value="MacRoman"/>
+    <property name="user.name" value="tanxiuguang"/>
+    <property name="java.class.path" value="/Users/tanxiuguang/work/personal/easyparking/parking/target/test-classes:/Users/tanxiuguang/work/personal/easyparking/parking/target/classes:/Users/tanxiuguang/work/open_source/maven/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/Users/tanxiuguang/work/open_source/maven/.m2/repository/org/json/json/20090211/json-20090211.jar:/Users/tanxiuguang/work/open_source/maven/.m2/repository/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar:/Users/tanxiuguang/work/open_source/maven/.m2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar:/Users/tanxiuguang/work/open_source/maven/.m2/repository/commons-codec/commons-codec/1.2/commons-codec-1.2.jar:/Users/tanxiuguang/work/open_source/maven/.m2/repository/com/google/code/gson/gson/1.7.1/gson-1.7.1.jar:/Users/tanxiuguang/work/open_source/maven/.m2/repository/log4j/log4j/1.2.16/log4j-1.2.16.jar:"/>
+    <property name="java.vm.specification.version" value="1.0"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home"/>
+    <property name="sun.java.command" value="/Users/tanxiuguang/work/personal/easyparking/parking/target/surefire/surefirebooter5244979944219729510.jar /Users/tanxiuguang/work/personal/easyparking/parking/target/surefire/surefire8015804965343956440tmp /Users/tanxiuguang/work/personal/easyparking/parking/target/surefire/surefire6271692247038127794tmp"/>
+    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="apple.awt.CToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.6.0_29"/>
+    <property name="java.ext.dirs" value="/Library/Java/Extensions:/System/Library/Java/Extensions:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/ext"/>
+    <property name="sun.boot.class.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jsfd.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar:/System/Library/Frameworks/JavaVM.framework/Frameworks/JavaRuntimeSupport.framework/Resources/Java/JavaRuntimeSupport.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/ui.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/laf.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/sunrsasign.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jsse.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/jce.jar:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/charsets.jar"/>
+    <property name="java.vendor" value="Apple Inc."/>
+    <property name="localRepository" value="/Users/tanxiuguang/work/open_source/maven/.m2/repository"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.apple.com/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="mrj.version" value="1070.1.6.0_29-402"/>
+    <property name="sun.cpu.isalist" value=""/>
+  </properties>
+  <testcase time="0.001" classname="com.easyparking.parking.AppTest" name="testApp"/>
+</testsuite>
