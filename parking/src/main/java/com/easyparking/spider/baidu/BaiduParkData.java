@@ -44,4 +44,16 @@ public class BaiduParkData implements Comparable<BaiduParkData>{
 	public int compareTo(BaiduParkData o) {
 		return this.location.equals(((BaiduParkData) o).getLocation()) ? 0 : 1;
 	}
+
+	@Override
+	public String toString() {
+		return "BaiduParkData [name=" + name + ", location=" + location + ", address=" + address + "]";
+	}
+	
+	
+	@Override
+	public int hashCode() {
+		return this.toString().hashCode();
+	}
+	
 }

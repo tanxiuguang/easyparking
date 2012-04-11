@@ -27,8 +27,6 @@ public class Crawler {
 	private Log logger = LogFactory.getLog(this.getClass());
 	
 	private static final String[] keys = {
-		"5568cc5d73c3f9d4e6cd2eed8ae2d8d6",
-		"f9c57c603af26d2ab51a97ff79ea689d",
 		"8ff13ca44f18bdc78e6acba0ee5222e4",
 		"be68e80a086317f5a44b65116ccb1bfb",
 		"0c4a94a4a9c96f79c38e2d6bade729be",
@@ -38,7 +36,11 @@ public class Crawler {
 		"36b1f697547f718176f6f66f4200dac5",
 		"cc47fbb42ef0f675e9d933e219d56ff1",
 		"0479aff8a0ff1dc2d9330303f92c7a66",
-		"cf93fe0430649318696ec5d88b2d461d"
+		"cf93fe0430649318696ec5d88b2d461d",
+		"52b7598df56ae12907b378aaffdef998",
+		"9c4d3e986906db7dcc50674b3b62bdc8",
+		"073fbc8d3fe5bad07ee070aa12608fa3",
+		"740b3a832fd8b56ba6fed6ec2408b7ca"
 		
 	};
 	
@@ -47,8 +49,10 @@ public class Crawler {
 		try {
 			JSONObject resultJSON = new JSONObject(result);
 			String status = resultJSON.optString("status");
-			logger.info("status: " + status);
 			
+			if (!"OK".equals(status)) {
+				logger.info("status: " + status + " " + result);
+			}
 			JSONArray resultJSONArray = resultJSON.optJSONArray("results");
 			Set<BaiduParkData> dataSet = new TreeSet<BaiduParkData>();
 				
@@ -67,17 +71,17 @@ public class Crawler {
 	}
 	
 	public List<String> crawleData() {
-		double startLat = 39.981157;
-		double endLat = 39.991342;
-		double startLng = 116.311582;
-		double endLng = 116.324967;
+		double startLat = 39.704575;
+		double endLat = 40.252305;
+		
+		double endLng = 116.669233;
 		
 		int counter = 0;
 		List<String> urlList = new ArrayList<String>();
 		Set<BaiduParkData> dataSet = new TreeSet<BaiduParkData>();
 		for ( ; startLat <= endLat; startLat += 0.01) {
 			logger.debug("test");
-			for (; startLng <= endLng; startLng += 0.01) {
+			for (double startLng = 116.107307; startLng <= endLng; startLng += 0.01) {
 //				String url = buildCrawlUrl(startLat, startLng, startLat + 0.01, startLng + 0.01, keys[counter / 800]);
 //				logger.info(url);
 //				//urlList.add(url);
@@ -115,9 +119,9 @@ public class Crawler {
 		
 		if (dataSet != null && dataSet.size() >= 20) {
 			
-			logger.info("start lat: " + startLat + " endLat: " + endLat);
+			logger.debug("start lat: " + startLat + " endLat: " + endLat);
 			double midLat = (startLat + endLat) / 2;
-			logger.info("result size 20 begin recursion" + midLat);
+			logger.debug("result size 20 begin recursion" + midLat);
 			crawlScal(result, startLat, startLng, (startLat + endLat) / 2, endLng, key, counter + 1);
 			crawlScal(result, (startLat + endLat) / 2, startLng, endLat, endLng, key, counter + 1);
 		} else {

@@ -4,8 +4,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.OutputStreamWriter;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.easyparking.spider.baidu.BaiduParkData;
 import com.google.gson.Gson;
@@ -23,10 +24,36 @@ public class FileFormat {
 		BufferedWriter bw = new BufferedWriter(out);
 		Gson gson = new Gson();
 		String line = null;
+		Set<BaiduParkData> dataList = new HashSet<BaiduParkData>();
 		while ((line = br.readLine()) != null) {
 			BaiduParkData data = gson.fromJson(line, BaiduParkData.class);
-			bw.write(data.getName().replace(",", "-") + "," + data.getLocation().getLat() + "," + data.getLocation().getLng() + "," + data.getAddress().replace(",", "-") + "\n");
+			dataList.add(data);
 		}
+		
+		
+		System.out.println(dataList.size());
+		//double startLat = 39.704575;
+		//double endLat = 40.252305;
+		
+		double startLat = 116.107307;
+		double endLat = 116.669233;
+		int cursor = 0;
+		for ( ; startLat <= endLat; startLat += 0.01) {
+			int counter = 0;
+			
+			
+			System.out.println(startLat + " - " + (startLat + 0.01) + ": " + counter);
+			
+		}
+		
+		
+//		for (BaiduParkData data : dataList) {
+//		
+//			
+//			//bw.write(data.getName().replace(",", "-") + "," + data.getLocation().getLat() + "," + data.getLocation().getLng() + "," + data.getAddress().replace(",", "-") + "\n");
+//		}
+		
+
 		
 		bw.flush();
 		br.close();
