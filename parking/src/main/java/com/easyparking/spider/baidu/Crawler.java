@@ -27,8 +27,8 @@ public class Crawler {
 	private Log logger = LogFactory.getLog(this.getClass());
 	
 	private static final String[] keys = {
-		"8ff13ca44f18bdc78e6acba0ee5222e4",
-		"be68e80a086317f5a44b65116ccb1bfb",
+		//"8ff13ca44f18bdc78e6acba0ee5222e4",
+		"eeefc3ff205805db3c50172b8ade11d5",
 		"0c4a94a4a9c96f79c38e2d6bade729be",
 		"a6d7f4d6cc26c40de940dd5ffecbdfce",
 		"96c3607ddd6dd6f7c9abd12405c6a43e",
@@ -42,6 +42,17 @@ public class Crawler {
 		"073fbc8d3fe5bad07ee070aa12608fa3",
 		"740b3a832fd8b56ba6fed6ec2408b7ca"
 		
+	};
+	
+	
+	private static final String[] keys1 = {
+		//"c45417fc98fd72258b3163b162f8349f",
+		"21bf52bce7bce495422b6941a010041f",
+		"606c59783bb6ff193563c0906259b403",
+		"52b7598df56ae12907b378aaffdef998",
+		"9c4d3e986906db7dcc50674b3b62bdc8",
+		"073fbc8d3fe5bad07ee070aa12608fa3",
+		"740b3a832fd8b56ba6fed6ec2408b7ca"
 	};
 	
 	
@@ -71,8 +82,11 @@ public class Crawler {
 	}
 	
 	public List<String> crawleData() {
-		double startLat = 39.704575;
-		double endLat = 40.252305;
+		//double startLat = 39.704575;
+		//double endLat = 40.252305;
+		
+		double startLat = 39.91457;
+		double endLat = 39.924574;
 		
 		double endLng = 116.669233;
 		
@@ -91,7 +105,7 @@ public class Crawler {
 //					logger.info("result size 20" + url);
 //				}
 				
-				crawlScal(dataSet, startLat, startLng, startLat + 0.01, startLng + 0.01, keys[counter / 500], counter);
+				crawlScal(dataSet, startLat, startLng, startLat + 0.01, startLng + 0.01, keys[counter / 200], counter);
 				
 				counter++;
 				
@@ -111,7 +125,7 @@ public class Crawler {
 	}
 	
 	private void crawlScal(Set<BaiduParkData> result, double startLat, double startLng, double endLat, double endLng, String key, int counter) {
-		String url = buildCrawlUrl(startLat, startLng, endLat, endLng, keys[counter / 800]);
+		String url = buildCrawlUrl(startLat, startLng, endLat, endLng, keys1[counter / 200]);
 		logger.info(url);
 		//urlList.add(url);
 		Set<BaiduParkData> dataSet = parseResult(Request.requestGet(url));

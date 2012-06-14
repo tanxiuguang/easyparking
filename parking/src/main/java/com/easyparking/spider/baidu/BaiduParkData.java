@@ -38,7 +38,8 @@ public class BaiduParkData implements Comparable<BaiduParkData>{
 	
 	@Override
 	public boolean equals(Object obj) {
-		return this.location.equals(((BaiduParkData) obj).getLocation());
+		BaiduParkData data = (BaiduParkData) obj;
+		return this.location.equals((data).getLocation()) || (this.name + this.address).equals(data.getName() + data.getAddress());
 	}
 
 	public int compareTo(BaiduParkData o) {
